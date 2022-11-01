@@ -1,0 +1,19 @@
+//DSU
+const int N=2e5+10;   
+int parent[N], siz[N]; 
+void make(int node){
+  parent[node]=node ; 
+  siz[node]=1; 
+}
+int find(int node){
+    if(node==parent[node]) return node;
+    //path compression
+    return parent[node]=find(parent[node]);
+}
+void Union(int a,int b){
+    a=find(a);
+    b=find(b); 
+    if(siz[a]<siz[b]) swap(a,b); 
+    parent[b]=a; // b->a (pseudo tree representation)
+    siz[a]+=siz[b]; 
+}
